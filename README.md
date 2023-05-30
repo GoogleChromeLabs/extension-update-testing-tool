@@ -2,6 +2,8 @@
 
 The Extension Update Testing Tool is a local extension update server that can be used for testing update flows during local development, including permission grants.
 
+![Screenshot of Extension Update Testing Tool](/docs/screenshot.png)
+
 ## Getting Started
 
 1. Install Node.js and NPM: https://nodejs.org/
