@@ -1,0 +1,72 @@
+<!-- Copyright 2023 Google LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Extension Update Server</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <section id="uploader">
+        <label id="upload">
+          Click or drag and drop to upload a folder or .zip
+          <input type="file"></input>
+        </label>
+        <p id="status">Upload an extension to get started.</p>
+        
+      </section>
+      <section id="instructions" data-disabled>
+        <h2>How to install:</h2>        
+        <details>
+          <summary>Install via Policy (macOS)</summary>
+          <ol>
+            <li>Download and open the policy file: <a href="/policy.mobileconfig">policy.mobileconfig</a></li>
+            <li>Install the policy at Settings > Profiles from the menu bar</li>
+            <li>Reload policies in Chrome at chrome://policy</li>
+            <li>Install the extension:</li>
+          </ol>
+          <a href="/extension.crx"><button>Install Extension</button></a>
+        </details>
+        <details>
+          <summary>Install via Policy (Windows)</summary>
+          <p><em>Note: The following commands may overwrite existing policies.</em></p>
+          <ol>
+            <li>Open Command Prompt as an administrator.</li>
+            <li>Run the following command: <code>reg add HKLM\SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist /v 1 /t REG_SZ /d <span id="windows-policy-id"></span> /f</code></li>
+            <li>Run the following command: <code>reg add HKLM\SOFTWARE\Policies\Google\Chrome\ExtensionInstallSources /v 1 /t REG_SZ /d <span id="windows-policy-host"></span>/* /f</code></li>
+            <li>Reload policies in Chrome at chrome://policy</li>
+            <li>Install the extension:</li>
+          </ol>
+          <a href="/extension.crx"><button>Install Extension</button></a>
+          <p><em>Hint: You can use the following commands to remove these policies:</em></p>
+          <p><code>reg delete HKLM\SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist /f</code></p>
+          <p><code>reg delete HKLM\SOFTWARE\Policies\Google\Chrome\ExtensionInstallSources /f</code></p>
+        </details>
+        <details>
+          <summary>Install manually</summary>
+          <p>Linux: This is supported in all versions of Chrome.</p>
+          <p>Mac and Windows: This method is only supported in <a href="https://www.chromium.org/getting-involved/download-chromium/" target="_blank">Chromium</a>.</p>
+          <ol>
+            <li>Download the extension: <a id="download" href="javascript:void">Download</a></li>
+            <li>Drag and drop the file on to the chrome://extensions page.</li>
+          </ol>
+        </details>
+        <p><em>Hint: To update the extension, simply enable Developer Mode at chrome://extensions and press "Update" after dragging a new extension here. You must increase the version number for Chrome to update the extension.</em></p>
+      </section>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
