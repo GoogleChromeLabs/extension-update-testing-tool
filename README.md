@@ -1,8 +1,18 @@
 # Extension Update Testing Tool
 
-The Extension Update Testing Tool is a local extension update server that can be used for testing update flows during local development, including permission grants.
+The Extension Update Testing Tool is a local extension update server that can be used for testing updates to Chrome Extensions during local development, including permission grants.
 
 ![Screenshot of Extension Update Testing Tool](/docs/screenshot.png)
+
+## Use Cases
+
+This tool serves a number of use cases:
+
+- Testing what permission warnings are generated for specific changes in the manifest.json file.
+- Seeing the update flow, including how an extension is disabled until a user grants additional permissions.
+- Testing migration logic between versions (this is possible by simply reloading an extension, but using the update logic is closer to what happens when updating from the Chrome Web Store).
+
+It is particularly useful for (but not limited to) migrations to Manifest V3, since this often involves changes to the permissions an extension requests.
 
 ## Getting Started
 
