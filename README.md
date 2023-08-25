@@ -37,6 +37,12 @@ You can configure the port of the local server using the `PORT` environment vari
 PORT=4000 npm start
 ```
 
+You can also use `WRITE_KEY` to write a private key locally and have a consistent extension ID across restarts, e.g:
+
+```
+WRITE_KEY=1 npm start
+```
+
 ## FAQ
 
 ### Why do I see "Package is invalid: 'CRX_REQUIRED_PROOF_MISSING'."?

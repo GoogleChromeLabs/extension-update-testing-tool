@@ -20,9 +20,12 @@
 const AdmZip = require("adm-zip");
 const Pbf = require("pbf");
 const crypto = require("crypto");
+const { promisify } = require("util");
+const { writeFile, stat, readFile } = require("fs/promises");
 
 const { CrxFileHeader, SignedData } = require("./generated/crx3");
 
+const SHOULD_WRITE_KEY = process.env.WRITE_KEY === "1";
 let keyPair;
 
 /**
@@ -207,15 +210,34 @@ function getSignature(privateKey, headerData, zipBuffer) {
 /**
  * Generates a new 2048-bit RSA keypair which can be used to sign extensions.
  */
-function generateKey() {
-  return new Promise((resolve, reject) => {
-    crypto.generateKeyPair(
-      "rsa",
-      { modulusLength: 2048 },
-      (err, publicKey, privateKey) => {
-        if (err) reject(err);
-        resolve({ publicKey, privateKey });
-      }
-    );
+async function generateKey() {
+  if (SHOULD_WRITE_KEY) {
+    if (
+      await stat("key.pem")
+        .then((s) => s.isFile())
+        .catch(() => false)
+    ) {
+      const privateKeyData = await readFile("key.pem");
+      const privateKey = crypto.createPrivateKey(privateKeyData);
+
+      return {
+        publicKey: crypto.createPublicKey(privateKey),
+        privateKey
+      };
+    }
+  }
+
+  const generateKeyPair = promisify(crypto.generateKeyPair);
+  const { publicKey, privateKey } = await generateKeyPair("rsa", {
+    modulusLength: 2048
   });
+
+  if (SHOULD_WRITE_KEY) {
+    await writeFile(
+      "key.pem",
+      privateKey.export({ type: "pkcs8", format: "pem" })
+    );
+  }
+
+  return { publicKey, privateKey };
 }
