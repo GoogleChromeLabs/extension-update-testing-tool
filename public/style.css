@@ -45,6 +45,10 @@ details summary {
   user-select: none;
 }
 
+summary {
+  cursor: pointer;
+}
+
 details[open] summary {
   margin-bottom: 15px;
 }
@@ -84,6 +88,7 @@ details code {
 }
 
 button {
+  cursor: pointer;
   margin-top: 5px;
   width: calc(100% - 40px);
   margin: 0 20px 10px 20px;
