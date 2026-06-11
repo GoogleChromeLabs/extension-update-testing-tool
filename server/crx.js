@@ -18,7 +18,7 @@
  */
 
 const AdmZip = require("adm-zip");
-const Pbf = require("pbf");
+const { PbfWriter } = require("pbf");
 const crypto = require("crypto");
 const { promisify } = require("util");
 const { writeFile, stat, readFile } = require("fs/promises");
@@ -78,7 +78,7 @@ module.exports.createCrx = async function (unpackedFolder) {
  * @param id Extension ID.
  */
 function signedDataForExtensionId(id) {
-  const pbf = new Pbf();
+  const pbf = new PbfWriter();
   SignedData.write({ crx_id: id }, pbf);
   return pbf.finish();
 }
@@ -94,7 +94,7 @@ function signedDataForExtensionId(id) {
  * @param zipBuffer Contents to sign.
  */
 function fileHeader(publicKey, privateKey, signedData, zipBuffer) {
-  const pbf = new Pbf();
+  const pbf = new PbfWriter();
 
   CrxFileHeader.write(
     {
