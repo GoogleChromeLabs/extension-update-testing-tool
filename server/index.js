@@ -60,5 +60,5 @@ app.get(
   require("./routes/policy")
 );
 
-app.listen(state.PORT);
+app.listen(state.PORT, "127.0.0.1");
 console.log(`Listening at http://localhost:${state.PORT}...`);
