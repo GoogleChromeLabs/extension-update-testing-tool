@@ -53,47 +53,7 @@ async function onDrop(event) {
     return;
   }
 
-  if (handle.kind === "directory") {
-    // Assume we've been given an extension directory
-    STATUS_ELEMENT.innerText = "Uploading...";
-
-    fetch("/upload/directory", {
-      method: "POST",
-      body: await buildFormDataFromDirectory(handle)
-    }).then(onUploadFinished);
-    return;
-  }
-
-  STATUS_ELEMENT.innerText = "Error: Drop an extension folder or zip.";
-}
-
-async function buildFormDataFromDirectory(directory) {
-  const formData = new FormData();
-  await addFiles(formData, "", directory);
-  return formData;
-}
-
-async function addFiles(formData, currentPath, directory) {
-  for await (const entry of directory.values()) {
-    switch (entry.kind) {
-      case "file":
-        const fileToAdd = await entry.getFile();
-        formData.append(
-          "files",
-          new Blob([await fileToAdd.arrayBuffer()]),
-          `${currentPath}/${fileToAdd.name}`
-        );
-        break;
-      case "directory":
-        const directoryToAdd = entry;
-        await addFiles(
-          formData,
-          `${currentPath}/${directoryToAdd.name}`,
-          directoryToAdd
-        );
-        break;
-    }
-  }
+  STATUS_ELEMENT.innerText = "Error: Drop an extension zip.";
 }
 
 async function onUploadFinished(response) {

@@ -31,12 +31,6 @@ app.use(
 app.get("/status", require("./routes/status"));
 
 app.post(
-  "/upload/directory",
-  require("./utils").setupTmpDirectory,
-  require("./routes/upload/directory")
-);
-
-app.post(
   "/upload/zip",
   require("./utils").setupTmpDirectory,
   require("./routes/upload/zip")

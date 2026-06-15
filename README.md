@@ -24,7 +24,7 @@ It is particularly useful for (but not limited to) migrations to Manifest V3, si
 
 1. Run `npm start`.
 1. Open the local server at http://localhost:8080.
-1. Drag an unpacked extension (folder or .zip file) to the page.
+1. Drag an extension (.zip file) to the page.
 1. Follow the instructions to install the extension.
 1. Drag an updated extension to the page, making sure to update the version field in the manifest.json file.
 1. Click "Update" at chrome://extensions to see the extension update.
