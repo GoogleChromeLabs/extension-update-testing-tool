@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "adm-zip": "^0.5.17",
-    "body-parser": "^2.2.2",
+    "body-parser": "^2.3.0",
     "express": "^4.22.2",
     "multer": "^2.2.0",
     "pbf": "^5.1.0",
