@@ -10,7 +10,7 @@
   "dependencies": {
     "adm-zip": "^0.5.17",
     "body-parser": "^2.2.2",
-    "express": "^4.22.2",
+    "express": "^5.2.1",
     "multer": "^2.2.0",
     "pbf": "^5.1.0",
     "uuid": "^14.0.0"
